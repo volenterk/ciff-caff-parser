@@ -14,6 +14,8 @@ public:
 
     CiffContent& getContent();
 
+    std::vector<::uint8_t> makePreview();
+
     void toString();
 private:
     CiffHeader header;

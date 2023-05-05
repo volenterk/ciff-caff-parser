@@ -1,2 +1,4 @@
 /examples/*
-/*.exe
+/*.o
+/ciff/*.o
+parser

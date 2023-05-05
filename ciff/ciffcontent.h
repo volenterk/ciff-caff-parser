@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <fstream>
+#include "ciffheader.h"
 
 using namespace std;
 
