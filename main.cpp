@@ -1,6 +1,7 @@
 #include <iostream>
-#include "ciff/ciffheader.cpp"
-#include "ciff/ciffcontent.cpp"
+#include "ciff/cifffile.h"
+#include "ciff/ciffcontent.h"
+#include "ciff/ciffheader.h"
 
 int main() {
     std::ifstream file("examples/example.ciff", std::ios::binary);
@@ -9,15 +10,10 @@ int main() {
         return 1;
     }
 
-    CiffHeader header = readCiffHeader(file);
-    header.toString();
-
-    CiffContent content = readCiffContent(file, header.getContentSize(), header.getHeight(), header.getWidth());
-    content.toString();
+    CiffFile ciff(file);
+    ciff.toString();
 
     std::ofstream outfile("examples/exampleOut.ciff", std::ios::binary);
-    outfile.write(reinterpret_cast<char*>(content.getPixels().data()), content.getContentSize());
+    outfile.write(reinterpret_cast<char*>(ciff.getContent().getPixels().data()), ciff.getHeader().getContentSize());
     return 0;
 }
-
-
