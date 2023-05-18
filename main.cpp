@@ -1,22 +1,35 @@
 #include <iostream>
 #include "ciff/cifffile.h"
-#include "ciff/ciffheader.h"
+#include "ciff/cafffile.h"
 
 int main() {
-    std::ifstream file("examples/bigger.ciff", std::ios::binary);
+    string option = "caff";
+    ifstream file("examples/bigger.ciff", ios::binary);
     if (!file.is_open()) {
-        std::cerr << "Error opening file!" << std::endl;
+        cerr << "Error opening file!" << endl;
         return -1;
     }
+
+    ofstream outfile("examples/exampleOut.webp", ios::binary);
+    vector<::uint8_t> preview;
+
     try {
-        CiffFile ciff(file);
-        ciff.toString();
-        std::ofstream outfile("examples/exampleOut.webp", std::ios::binary);
-        std::vector<::uint8_t> preview = ciff.makePreview();
-        outfile.write(reinterpret_cast<char*>(preview.data()), preview.size());
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        if (option == "caff") {
+            CaffFile caff(file);
+            caff.toString();
+            preview = caff.makePreview();
+
+        } else if (option == "ciff") {
+            CiffFile ciff(file);
+            ciff.toString();
+            preview = ciff.makePreview();
+        }
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
         return -1;
     }
+
+    outfile.write(reinterpret_cast<char*>(preview.data()), preview.size());
+
     return 0;
 }

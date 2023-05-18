@@ -2,13 +2,11 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -pedantic -std=c++11
 LIBS = -lwebp
 
-SRC = main.cpp ciff/cifffile.cpp ciff/ciffheader.cpp ciff/ciffcontent.cpp
-HDR = ciff/cifffile.h ciff/ciffheader.h ciff/ciffcontent.h
+SRC = main.cpp ciff/cifffile.cpp
+HDR = ciff/cifffile.h
 
-# Define the object files
 OBJ = $(SRC:.cpp=.o)
 
-# Define the output executable
 TARGET = parser
 
 all: $(TARGET)
@@ -21,5 +19,3 @@ $(TARGET): $(OBJ)
 
 clean:
 	rm -f $(OBJ) $(TARGET)
-
-all_clean: all clean
