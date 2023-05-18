@@ -1,10 +1,10 @@
 #include <iostream>
-#include "ciff/cifffile.h"
-#include "ciff/cafffile.h"
+#include "cifffile.h"
+#include "cafffile.h"
 
 int main() {
     string option = "caff";
-    ifstream file("examples/bigger.ciff", ios::binary);
+    ifstream file("examples/3.caff", ios::binary);
     if (!file.is_open()) {
         cerr << "Error opening file!" << endl;
         return -1;
@@ -16,7 +16,7 @@ int main() {
     try {
         if (option == "caff") {
             CaffFile caff(file);
-            caff.toString();
+            //caff.toString();
             preview = caff.makePreview();
 
         } else if (option == "ciff") {

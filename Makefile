@@ -2,8 +2,8 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -pedantic -std=c++11
 LIBS = -lwebp
 
-SRC = main.cpp ciff/cifffile.cpp
-HDR = ciff/cifffile.h
+SRC = main.cpp cifffile.cpp cafffile.cpp
+HDR = cifffile.h cafffile.h
 
 OBJ = $(SRC:.cpp=.o)
 

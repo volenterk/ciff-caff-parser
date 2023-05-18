@@ -8,7 +8,8 @@ using namespace std;
 
 class CiffHeader {
 public:
-    CiffHeader(ifstream& file);
+    CiffHeader() : headerSize(0), contentSize(0), width(0), height(0), tags() {}
+    explicit CiffHeader(ifstream& file);
 
     uint64_t getContentSize() const;
     uint64_t getWidth() const;
@@ -30,6 +31,7 @@ private:
 
 class CiffContent {
 public:
+    CiffContent() : width(0), height(0), contentSize(0), pixels() {}
     CiffContent(ifstream& file, const CiffHeader& header);
 
     vector<uint8_t> getPixels() const;
@@ -46,6 +48,7 @@ private:
 
 class CiffFile {
 public:
+    CiffFile() : header(), content() {}
     explicit CiffFile(ifstream& file)  : header(file), content(file, header) {}
 
     CiffHeader& getHeader();
