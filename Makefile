@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -pedantic -std=c++11
+CXXFLAGS = -Wall -Wextra -pedantic -std=c++20
 LIBS = -lwebp
 
 SRC = main.cpp cifffile.cpp cafffile.cpp

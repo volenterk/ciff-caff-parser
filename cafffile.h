@@ -13,7 +13,12 @@ public:
     CaffHeader() : magic("CAFF"), headerSize(0), numAnim(0) {}
     explicit CaffHeader(ifstream& file);
 
-    //void toString();
+    void toString() const {
+        cout << "\n###CAFF HEADER###\n" << endl;
+        cout << "Magic: " << magic << endl;
+        cout << "Header size: " << headerSize << endl;
+        cout << "Number of animations: " << numAnim << endl;
+    }
 
 private:
     string magic;
@@ -26,7 +31,12 @@ public:
     CaffCredits() : year(0), month(0), day(0), hour(0), minute(0), creatorLen(0) {}
     explicit CaffCredits(ifstream& file);
 
-    //void toString();
+    void toString() const {
+        cout << "\n###CAFF CREDITS###\n";
+        cout << "Creation Date and Time: " << year << "-" << month << "-" << day << " " << hour << ":" << minute << endl;
+        cout << "Creator length: " << creatorLen << endl;
+        cout << "Creator: " << creator << endl;
+    }
 
 private:
     uint16_t year;
@@ -47,7 +57,13 @@ public:
         return ciff;
     }
 
-    //void toString();
+    void toString() const {
+        cout << "\n###CAFF ANIMATION###\n" << endl;
+        cout << "Duration: " << duration << endl;
+        cout << "CIFF: ";
+        ciff.toString();
+        cout << endl;
+    }
 
 private:
     uint64_t duration;
@@ -61,17 +77,24 @@ public:
     }
 
     void parseCaff();
-    void parseAnimations();
 
     vector<uint8_t> makePreview();
-    //void toString();
+    void toString() const {
+        cout << "###CAFF FILE###\n" << endl;
+        header.toString();
+        credits.toString();
+        for (const auto& anim : animations) {
+            anim.toString();
+        }
+    }
 
 private:
     ifstream& file;
     CaffHeader header;
     CaffCredits credits;
     vector<CaffAnimation> animations;
-};
 
+    void parseAnimations();
+};
 
 #endif //CIFF_CAFF_PARSER_CAFFFILE_H

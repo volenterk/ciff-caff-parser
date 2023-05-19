@@ -1,4 +1,6 @@
-/examples/*
+/examples
+/test-output
 /*.o
 /ciff/*.o
 parser
+memtrace.*
