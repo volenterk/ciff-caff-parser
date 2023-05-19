@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
-        cerr << "Usage ./parser [-caff/-ciff] [path-to-file].[caff/ciff]" << endl;
+        cerr << "Usage ./parser [-caff | -ciff] [path-to-file].[caff | ciff]" << endl;
         return -1;
     }
     string option = argv[1];
@@ -18,8 +18,8 @@ int main(int argc, char* argv[]) {
 
     ofstream outFile;
     string outPath;
-    size_t extPos = path.find_last_of('.');
-    string ext = path.substr(extPos + 1);
+    size_t extIdx = path.find_last_of('.');
+    string ext = path.substr(extIdx + 1);
 
     if (ext == "caff") {
         if (option != "-caff") {
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
             return -1;
         }
 
-        outPath = path.substr(0, extPos) + ".webp";
+        outPath = path.substr(0, extIdx) + ".webp";
         outFile.open(outPath, ios::binary);
     } else if (ext == "ciff") {
         if (option != "-ciff") {
@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
             return -1;
         }
 
-        outPath = path.substr(0, extPos) + ".webp";
+        outPath = path.substr(0, extIdx) + ".webp";
         outFile.open(outPath, ios::binary);
     } else {
         cerr << "Unsupported format! Exiting..." << endl;
@@ -48,11 +48,11 @@ int main(int argc, char* argv[]) {
         if (option == "-caff") {
             CaffFile caff(file);
             preview = caff.makePreview();
-            caff.toString();
+            //caff.toString();
         } else if (option == "-ciff") {
             CiffFile ciff(file);
             preview = ciff.makePreview();
-            ciff.toString();
+            //ciff.toString();
         }
     } catch (const exception& e) {
         cerr << "Error: " << e.what() << endl;
